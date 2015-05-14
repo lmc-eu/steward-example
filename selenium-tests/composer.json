@@ -1,0 +1,24 @@
+{
+    "name": "lmc/selenium-example",
+    "description": "Example repository showing usage of Steward library",
+    "license": "MIT",
+    "authors": [
+        {
+          "name": "Ondřej Machulda",
+          "email": "ondrej.machulda@gmail.com"
+        },
+        {
+          "name": "LMC s.r.o.",
+          "homepage": "https://github.com/lmc-eu"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "lmc/steward": "~1.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "My\\": "tests/"
+        }
+    }
+}

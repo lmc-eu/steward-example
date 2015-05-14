@@ -1,0 +1,11 @@
+# Ignore libraries installed using Composer
+composer.phar
+vendor
+
+# Ignore test logs
+logs
+
+# IDE files
+.idea
+*.iml
+nbproject
