@@ -11,15 +11,16 @@ before_install:
   - cd selenium-tests/
 
 install:
-  - composer install --no-interaction
+  - composer install --no-interaction # Install Steward and its dependencies
   - if [ "$VERSION" = "master" ]; then composer require lmc/steward:dev-master; fi
-  - ./vendor/bin/steward.php install --no-interaction
+  - ./vendor/bin/steward.php install --no-interaction # Download the Selenium standalone server jar file
 
 before_script:
   - java -jar ./vendor/bin/selenium-server-standalone-2.45.0.jar -role hub &
-  - sleep 3
-  - phantomjs --webdriver-selenium-grid-hub=http://127.0.0.1:4444 --webdriver= &
-  - sleep 2
+  - sleep 3 # wait until Selenium starts
+  - phantomjs --webdriver-selenium-grid-hub=http://127.0.0.1:4444 --webdriver=8910 & # Start first PhantomJS instance
+  - phantomjs --webdriver-selenium-grid-hub=http://127.0.0.1:4444 --webdriver=8911 & # Start second PhantomJS instance
+  - sleep 2 # wait until phantomjs starts
 
 script:
-  - ./vendor/bin/steward.php run-tests production phantomjs
+  - ./vendor/bin/steward.php run-tests production phantomjs # Run the tests in phantomjs and specify `production` as an environment name
