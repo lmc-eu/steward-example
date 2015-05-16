@@ -3,16 +3,21 @@ language: php
 php:
   - 5.6
 
+env:
+  - VERSION=tagged # run against tagged version defined in composer.json
+  - VERSION=master # run against master branch as an integration test
+
 before_install:
   - cd selenium-tests/
 
 install:
   - composer install --no-interaction
+  - if [ "$VERSION" = "master" ]; then composer require lmc/steward:dev-master; fi
   - ./vendor/bin/steward.php install --no-interaction
 
 before_script:
   - java -jar ./vendor/bin/selenium-server-standalone-2.45.0.jar -role hub &
-  - sleep 2
+  - sleep 3
   - phantomjs --webdriver-selenium-grid-hub=http://127.0.0.1:4444 --webdriver= &
   - sleep 2
 
