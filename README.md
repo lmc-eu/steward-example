@@ -1,4 +1,7 @@
+Last commit:
 [![Build Status](https://travis-ci.org/lmc-eu/steward-example.svg)](https://travis-ci.org/lmc-eu/steward-example)
+Periodic builds (runs twice a day):
+[![Build Status](https://travis-ci.org/lmc-dummy/steward-example.svg)](https://travis-ci.org/lmc-dummy/steward-example)
 
 # [Steward](https://github.com/lmc-eu/steward) example project
 
