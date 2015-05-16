@@ -2,6 +2,7 @@
 
 namespace My;
 
+use Lmc\Steward\ConfigProvider;
 use Lmc\Steward\Test\AbstractTestCase;
 
 /**
@@ -15,4 +16,15 @@ abstract class MyAbstractTestCase extends AbstractTestCase
     public static $browserHeight = 768;
     /** @var string */
     public static $baseUrl = 'http://www.w3.org/';
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        if (ConfigProvider::getInstance()->env == 'production') {
+            $this->warn('The tests are run against production, so be careful!');
+        }
+    }
+
+
 }
