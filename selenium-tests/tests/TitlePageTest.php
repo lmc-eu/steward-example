@@ -24,8 +24,8 @@ class TitlePageTest extends MyAbstractTestCase
     {
         // Check title contents
         $this->assertContains('World Wide Web Consortium', $this->wd->getTitle());
-        // Check recent news are present
-        $this->assertCount(6, $this->titlePage->getRecentNews());
+        // Check recent news are present (their total count varies over time, so we cannot just use assertCount here)
+        $this->assertGreaterThanOrEqual(4, count($this->titlePage->getRecentNews()));
         // Check left sidebar is visible
         $this->assertTrue($this->titlePage->isLeftSidebarVisible(), 'Left sidebar is not visible!');
     }
