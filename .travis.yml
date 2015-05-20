@@ -12,7 +12,7 @@ before_install:
 
 install:
   - composer install --no-interaction # Install Steward and its dependencies
-  - if [ "$VERSION" = "master" ]; then composer require lmc/steward:dev-master; fi
+  - if [ "$VERSION" = "master" ]; then composer require lmc/steward:dev-master --update-with-dependencies; fi
   - ./vendor/bin/steward.php install --no-interaction # Download the Selenium standalone server jar file
 
 before_script:
