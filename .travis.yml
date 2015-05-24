@@ -20,7 +20,7 @@ before_script:
   - sleep 3 # wait until Selenium starts
   - phantomjs --webdriver-selenium-grid-hub=http://127.0.0.1:4444 --webdriver=8910 & # Start first PhantomJS instance
   - phantomjs --webdriver-selenium-grid-hub=http://127.0.0.1:4444 --webdriver=8911 & # Start second PhantomJS instance
-  - sleep 2 # wait until phantomjs starts
+  - sleep 3 # wait until phantomjs starts
 
 script:
   - ./vendor/bin/steward.php run-tests production phantomjs # Run the tests in phantomjs and specify `production` as an environment name
