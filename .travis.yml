@@ -4,23 +4,38 @@ php:
   - 5.6
 
 env:
-  - VERSION=tagged # run against tagged version defined in composer.json
-  - VERSION=master # run against master branch as an integration test
+  - BROWSER=phantomjs STEWARD_VERSION=tagged # run tests in PhantomJS against tagged version defined in composer.json
+  - BROWSER=phantomjs STEWARD_VERSION=master # run tests in PhantomJS against master branch as an integration test
+  - BROWSER=firefox STEWARD_VERSION=tagged # run tests in Firefox against tagged version defined in composer.json
+  - BROWSER=firefox STEWARD_VERSION=master # run tests in Firefox against master branch as an integration test
 
 before_install:
   - cd selenium-tests/
 
 install:
   - composer install --no-interaction # Install Steward and its dependencies
-  - if [ "$VERSION" = "master" ]; then composer require lmc/steward:dev-master --update-with-dependencies; fi
+  - if [ "$STEWARD_VERSION" = "master" ]; then composer require lmc/steward:dev-master --update-with-dependencies; fi
   - ./vendor/bin/steward.php install --no-interaction # Download the Selenium standalone server jar file
 
 before_script:
   - java -jar ./vendor/bin/selenium-server-standalone-2.45.0.jar -role hub &
   - sleep 3 # wait until Selenium starts
-  - phantomjs --webdriver-selenium-grid-hub=http://127.0.0.1:4444 --webdriver=8910 & # Start first PhantomJS instance
-  - phantomjs --webdriver-selenium-grid-hub=http://127.0.0.1:4444 --webdriver=8911 & # Start second PhantomJS instance
-  - sleep 3 # wait until phantomjs starts
+
+  # Start two PhantomJS instances
+  - if [ "$BROWSER" = "phantomjs" ]; then phantomjs --webdriver-selenium-grid-hub=http://127.0.0.1:4444 --webdriver=8910 & fi
+  - if [ "$BROWSER" = "phantomjs" ]; then phantomjs --webdriver-selenium-grid-hub=http://127.0.0.1:4444 --webdriver=8911 & fi
+
+  # Start first Firefox instance
+  - if [ "$BROWSER" = "firefox" ]; then Xvfb :99 -nolisten tcp -ac -screen 0 1280x1024x24 & fi
+  - if [ "$BROWSER" = "firefox" ]; then export DISPLAY=:99.0; fi
+  - if [ "$BROWSER" = "firefox" ]; then java -jar ./vendor/bin/selenium-server-standalone-2.45.0.jar -role node -port 8910 -maxSession 1 & fi
+
+  # Start second Firefox instance
+  - if [ "$BROWSER" = "firefox" ]; then Xvfb :98 -nolisten tcp -ac -screen 0 1280x1024x24 & fi
+  - if [ "$BROWSER" = "firefox" ]; then export DISPLAY=:98.0; fi
+  - if [ "$BROWSER" = "firefox" ]; then java -jar ./vendor/bin/selenium-server-standalone-2.45.0.jar -role node -port 8911 -maxSession 1 & fi
+
+  - sleep 3 # wait until browsers starts
 
 script:
-  - ./vendor/bin/steward.php run-tests production phantomjs # Run the tests in phantomjs and specify `production` as an environment name
+  - ./vendor/bin/steward.php run-tests production $BROWSER # Run the tests in $BROWSER and specify `production` as an environment name
