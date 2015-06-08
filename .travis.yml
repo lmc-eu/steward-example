@@ -15,10 +15,10 @@ before_install:
 install:
   - composer install --no-interaction # Install Steward and its dependencies
   - if [ "$STEWARD_VERSION" = "master" ]; then composer require lmc/steward:dev-master --update-with-dependencies; fi
-  - ./vendor/bin/steward.php install --no-interaction # Download the Selenium standalone server jar file
+  - SELENIUM_PATH=$(./vendor/bin/steward.php install --no-interaction) # Download the Selenium standalone server jar file
 
 before_script:
-  - java -jar ./vendor/bin/selenium-server-standalone-2.45.0.jar -role hub &
+  - java -jar $SELENIUM_PATH -role hub &
   - sleep 3 # wait until Selenium starts
 
   # Start two PhantomJS instances
