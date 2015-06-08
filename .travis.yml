@@ -28,12 +28,12 @@ before_script:
   # Start first Firefox instance
   - if [ "$BROWSER" = "firefox" ]; then Xvfb :99 -nolisten tcp -ac -screen 0 1280x1024x24 & fi
   - if [ "$BROWSER" = "firefox" ]; then export DISPLAY=:99.0; fi
-  - if [ "$BROWSER" = "firefox" ]; then java -jar ./vendor/bin/selenium-server-standalone-2.45.0.jar -role node -port 8910 -maxSession 1 & fi
+  - if [ "$BROWSER" = "firefox" ]; then java -jar $SELENIUM_PATH -role node -port 8910 -maxSession 1 & fi
 
   # Start second Firefox instance
   - if [ "$BROWSER" = "firefox" ]; then Xvfb :98 -nolisten tcp -ac -screen 0 1280x1024x24 & fi
   - if [ "$BROWSER" = "firefox" ]; then export DISPLAY=:98.0; fi
-  - if [ "$BROWSER" = "firefox" ]; then java -jar ./vendor/bin/selenium-server-standalone-2.45.0.jar -role node -port 8911 -maxSession 1 & fi
+  - if [ "$BROWSER" = "firefox" ]; then java -jar $SELENIUM_PATH -role node -port 8911 -maxSession 1 & fi
 
   - sleep 3 # wait until browsers starts
 
