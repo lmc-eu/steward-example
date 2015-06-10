@@ -15,7 +15,7 @@ before_install:
 install:
   - composer install --no-interaction # Install Steward and its dependencies
   - if [ "$STEWARD_VERSION" = "master" ]; then composer require lmc/steward:dev-master --update-with-dependencies; fi
-  - SELENIUM_PATH=$(./vendor/bin/steward.php install --no-interaction) # Download the Selenium standalone server jar file
+  - SELENIUM_PATH=$(./vendor/bin/steward install --no-interaction) # Download the Selenium standalone server jar file
 
 before_script:
   - java -jar $SELENIUM_PATH -role hub &
@@ -38,4 +38,4 @@ before_script:
   - sleep 3 # wait until browsers starts
 
 script:
-  - ./vendor/bin/steward.php run-tests production $BROWSER # Run the tests in $BROWSER and specify `production` as an environment name
+  - ./vendor/bin/steward run-tests production $BROWSER # Run the tests in $BROWSER and specify `production` as an environment name
