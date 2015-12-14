@@ -22,6 +22,6 @@ It is also run periodically on Travis CI as an integration test of both Steward'
 
 ## What is missing so far
 - Test with file upload and `getFixturePath()` usage
-- Custom EventDispatcher which adds some custom option to the Steward run-tests command
+- Custom EventDispatcher which adds some custom option to the Steward `run` command
 - Custom publisher that reports the results somewhere
 - Specifying custom browser capabilities

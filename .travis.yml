@@ -38,4 +38,4 @@ before_script:
   - sleep 3 # wait until browsers starts
 
 script:
-  - ./vendor/bin/steward run-tests production $BROWSER # Run the tests in $BROWSER and specify `production` as an environment name
+  - ./vendor/bin/steward run production $BROWSER # Run the tests in $BROWSER and specify `production` as an environment name
