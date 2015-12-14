@@ -15,12 +15,18 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "lmc/steward": "~1.1",
+        "lmc/steward": "dev-feature/webdriver-upgrade as 1.2.0",
         "fzaninotto/faker": "~1.4"
     },
     "autoload": {
         "psr-4": {
           "My\\": "tests/"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/OndraM/steward"
+        }
+    ]
 }
