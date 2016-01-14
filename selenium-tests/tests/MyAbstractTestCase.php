@@ -25,6 +25,4 @@ abstract class MyAbstractTestCase extends AbstractTestCase
             $this->warn('The tests are run against production, so be careful!');
         }
     }
-
-
 }

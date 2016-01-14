@@ -2,6 +2,7 @@
 
 namespace My\Pages;
 
+use Facebook\WebDriver\WebDriverElement;
 use Lmc\Steward\Component\AbstractComponent;
 
 /**
@@ -17,7 +18,7 @@ class TitlePage extends AbstractComponent
 
     /**
      * Get listed recent news
-     * @return \RemoteWebElement[]
+     * @return WebDriverElement[]
      */
     public function getRecentNews()
     {

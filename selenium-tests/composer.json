@@ -15,7 +15,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "lmc/steward": "~1.1",
+        "lmc/steward": "~1.2",
         "fzaninotto/faker": "~1.4"
     },
     "autoload": {

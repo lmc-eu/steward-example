@@ -2,6 +2,7 @@
 
 namespace My;
 
+use Facebook\WebDriver\WebDriverDimension;
 use My\Pages\TitlePage;
 
 /**
@@ -28,7 +29,7 @@ class MobileTitlePageTest extends MyAbstractTestCase
 
     public function testShouldNotDisplayLeftSidebarInMobileView()
     {
-        /** @var \WebDriverDimension $size */
+        /** @var WebDriverDimension $size */
         $size = $this->wd->manage()->window()->getSize();
         $this->log('Current screen size is %dx%d px', $size->getWidth(), $size->getHeight());
 
