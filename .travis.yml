@@ -5,17 +5,20 @@ php:
   - 7
 
 env:
-  - BROWSER=phantomjs STEWARD_VERSION=tagged # run tests in PhantomJS against tagged version defined in composer.json
-  - BROWSER=phantomjs STEWARD_VERSION=master # run tests in PhantomJS against master branch as an integration test
-  - BROWSER=firefox STEWARD_VERSION=tagged # run tests in Firefox against tagged version defined in composer.json
-  - BROWSER=firefox STEWARD_VERSION=master # run tests in Firefox against master branch as an integration test
+  - BROWSER=phantomjs
+  - BROWSER=firefox
+
+matrix:
+  include:
+    - php: 7
+      env: BROWSER=phantomjs USE_STEWARD_MASTER=1 # run tests also against Steward master branch
 
 before_install:
   - cd selenium-tests/
 
 install:
   - composer install --no-interaction # Install Steward and its dependencies
-  - if [ "$STEWARD_VERSION" = "master" ]; then composer require lmc/steward:dev-master --update-with-dependencies; fi
+  - if [ -n "$USE_STEWARD_MASTER" ]; then composer require lmc/steward:dev-master --update-with-dependencies; fi
   - SELENIUM_PATH=$(./vendor/bin/steward install --no-interaction) # Download the Selenium standalone server jar file
 
 before_script:
