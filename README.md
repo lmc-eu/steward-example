@@ -1,12 +1,7 @@
-Last commit:
-[![Build Status](https://travis-ci.org/lmc-eu/steward-example.svg)](https://travis-ci.org/lmc-eu/steward-example)
-Periodic builds (runs twice a day):
-[![Build Status](https://travis-ci.org/lmc-dummy/steward-example.svg)](https://travis-ci.org/lmc-dummy/steward-example)
-
 # [Steward](https://github.com/lmc-eu/steward) example project
+[![Build Status](https://img.shields.io/travis/lmc-eu/steward-example.svg?style=flat-square)](https://travis-ci.org/lmc-eu/steward-example)
 
-This is an example project showing usage and extensibility of [Steward](https://github.com/lmc-eu/steward).
-It is also run periodically on Travis CI as an integration test of both Steward's master branch and latest tagged version.
+This is an example project showing usage and extensibility of [Steward](https://github.com/lmc-eu/steward), a PHP tool for Selenium WebDriver functional testing.
 
 ## What is shown in this example project
 - Custom [`MyAbstractTestCase`](https://github.com/lmc-eu/steward-example/blob/master/selenium-tests/tests/MyAbstractTestCase.php) class as a common ancestor of all tests defining eg. default browser size
