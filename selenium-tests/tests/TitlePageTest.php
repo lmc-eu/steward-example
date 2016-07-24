@@ -37,12 +37,12 @@ class TitlePageTest extends MyAbstractTestCase
         $this->assertFalse($this->titlePage->isLeftSidebarVisible());
     }
 
-    public function testShouldContainGoogleSearchLeadingToGoogleCom()
+    public function testShouldContainSearchFormLeadingToDuckDuckGo()
     {
         $this->titlePage->fillAndSubmitSearch('HTML 5');
 
-        // The google custom search form should lead us to google search
-        $this->assertContains('www.google', $this->wd->getCurrentURL());
+        // The search form should lead us to DuckDuckGo search
+        $this->assertContains('duckduckgo.com', $this->wd->getCurrentURL());
         $this->assertContains('site:w3.org', $this->wd->getTitle());
     }
 }
