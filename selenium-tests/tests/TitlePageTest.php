@@ -12,10 +12,11 @@ class TitlePageTest extends MyAbstractTestCase
     /** @var TitlePage The title-page Page Object */
     protected $titlePage;
 
-    public function setUp()
+    /**
+     * @before
+     */
+    public function init()
     {
-        parent::setUp();
-
         $this->titlePage = new TitlePage($this);
         $this->wd->get(self::$baseUrl);
     }

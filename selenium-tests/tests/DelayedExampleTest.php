@@ -22,13 +22,14 @@ class DelayedExampleTest extends MyAbstractTestCase
     /** @var array */
     private $data;
 
-    public function setUp()
+    /**
+     * @before
+     */
+    public function init()
     {
         // Load the data created and stored by some other test
         $this->data = (new Legacy($this))
             ->loadWithName(SeedDataTest::SEED_DATA_LEGACY_NAME);
-
-        parent::setUp();
     }
 
     /**
