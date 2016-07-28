@@ -26,11 +26,12 @@ class SeedDataTest extends MyAbstractTestCase
     private $legacy;
     const SEED_DATA_LEGACY_NAME = 'seed-data';
 
-    public function setUp()
+    /**
+     * @before
+     */
+    public function init()
     {
         $this->legacy = new Legacy($this);
-
-        parent::setUp();
     }
 
     public function testSeedSomeData()
