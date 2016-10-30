@@ -60,4 +60,5 @@ script:
   - ./vendor/bin/steward run production $BROWSER -vvv # Run the tests in $BROWSER and specify `production` as an environment name
 
 after_script:
+  - ./vendor/bin/steward results -vvv
   - cat selenium-server.log
