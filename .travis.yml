@@ -62,3 +62,7 @@ script:
 after_script:
   - ./vendor/bin/steward results -vvv
   - cat selenium-server.log
+
+cache:
+  directories:
+    - $HOME/.composer/cache
