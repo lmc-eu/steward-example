@@ -20,10 +20,11 @@ install:
   - composer install --no-interaction # Install Steward and its dependencies
   - if [ -n "$USE_STEWARD_MASTER" ]; then composer require lmc/steward:dev-master --update-with-dependencies; fi
   - SELENIUM_PATH=$(./vendor/bin/steward install --no-interaction) # Download the Selenium standalone server jar file
+  - echo "Selenium server path:" $SELENIUM_PATH
 
 before_script:
-  - java -jar $SELENIUM_PATH -role hub &
-  - sleep 3 # wait until Selenium starts
+  - java -jar $SELENIUM_PATH -role hub -log selenium-server.log &
+  - until $(echo | nc localhost 4444); do sleep 1; echo Waiting for selenium-server to start...; done;
 
   # Start two PhantomJS instances
   - if [ "$BROWSER" = "phantomjs" ]; then phantomjs --webdriver-selenium-grid-hub=http://127.0.0.1:4444 --webdriver=8910 & fi
@@ -43,3 +44,6 @@ before_script:
 
 script:
   - ./vendor/bin/steward run production -vvv $BROWSER # Run the tests in $BROWSER and specify `production` as an environment name
+
+after_script:
+  - cat selenium-server.log
