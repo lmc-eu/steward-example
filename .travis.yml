@@ -6,6 +6,8 @@ php:
 
 addons:
   firefox: "47.0.1" # Firefox 47.0.1 is the latest Firefox which does not require Geckodriver (but it is compatible only with Selenium 2.53.1)
+  jwt:
+    secure: XKHU62aeWKe1M9cP7M1Is63NbiuVJUB9o6ijuLvChiiu4/jOW+YU3WtcLfsbWjZj4IwMF8AlZ6gmoA2RVi3JeviyWddax+tgsF8TyTTqW9jjdu2fdkTW1lCaVBoTVbi0u+1Gx6NJBqr0DUTgKSW7orEwvHDO0X5LZD6KZqNl7xZI+aI/321pvp5KexooDH4TrutKKYb3xJcVkc8m5RnSwaCFoiP+yWZsjAoN7sshtIpAKsX1271XhH+SSvOXLr2fH7GHB2iSQMBljf1fh9kSy7RVW4rL29/X6gwcQUZ9E9EB3KhQjaqsNFxzHzHBqesUfYwkWTL4MH7q9Jn3GBXFiqRGIvvub5dvoNtZcPnqF59UJNRb5/i7XJpJ5uTOBIfQQaLXp72DGP7udbGjakG9HvdaosjtsJLj0vt8voHLWXo9+HD2S8yC11Um5/FpleiNAlID4MAKJSrZiV4BGz54l4DmmTlCSBNm/9NhKVqyNnTl62xGTG/wjimUhfWB/DNrbqtYdr2EvZoyB8shZ/D5JYByCj0VogMJi3qVAkEU9UaFSTKprTZn2uTdZoOICPOl/FLKFKbdabfnIg4c1GCQ9zs7mzsV9wpj4fUnwpWkNYbg9F0l06kXBdYTG4+mnQW6Pbwejfpp1wt8CcXoxvYmwgXJp9PrhnbNq8ffh10RPUg=
 
 env:
   - BROWSER=phantomjs
@@ -15,6 +17,14 @@ matrix:
   include:
     - php: 7
       env: BROWSER=phantomjs USE_STEWARD_MASTER=1 # run tests also against Steward master branch
+    - php: 7
+      env: BROWSER=microsoftedge SAUCELABS=1 # run tests in MicrosoftEdge on SauceLabs cloud
+      install:
+        - composer install --no-interaction
+      before_script: ~
+      script:
+        - ./vendor/bin/steward run production $BROWSER -vvv --server-url=http://$SAUCE_USERNAME:$SAUCE_ACCESS_KEY@ondemand.saucelabs.com  --capability="platform:Windows 10"
+      after_script: ~
 
 before_install:
   - cd selenium-tests/
@@ -47,7 +57,7 @@ before_script:
   - sleep 3 # wait until browsers starts
 
 script:
-  - ./vendor/bin/steward run production -vvv $BROWSER # Run the tests in $BROWSER and specify `production` as an environment name
+  - ./vendor/bin/steward run production $BROWSER -vvv # Run the tests in $BROWSER and specify `production` as an environment name
 
 after_script:
   - cat selenium-server.log
