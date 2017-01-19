@@ -22,7 +22,7 @@ class TitlePage extends AbstractComponent
      */
     public function getRecentNews()
     {
-        $this->debug('Geting recent news');
+        $this->debug('Getting recent news');
         $recentNews = $this->findMultipleByCss(self::RECENT_NEWS_SELECTOR);
         return $recentNews;
     }
