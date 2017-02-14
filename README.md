@@ -4,12 +4,12 @@
 This is an example project showing usage and extensibility of [Steward](https://github.com/lmc-eu/steward), a PHP tool for Selenium WebDriver functional testing.
 
 As an example, the tests are run in Firefox and PhantomJS browsers natively on Travis CI, but also in Microsoft Edge using
-[Sauce Labs](https://saucelabs.com/) cloud service (see [Sauce Labs build status](https://saucelabs.com/beta/builds/b6c93f43e6e9477580f05c5afdfb27e4)).
+[Sauce Labs](https://saucelabs.com/) cloud service (see [Sauce Labs build status](https://saucelabs.com/u/php-webdriver) or [results of a single build](https://saucelabs.com/beta/builds/4f1103bede17401d8f5f9f626ce8da26)).
 
 ## What is shown in this example project
 - Custom [`MyAbstractTestCase`](https://github.com/lmc-eu/steward-example/blob/master/selenium-tests/tests/MyAbstractTestCase.php) class as a common ancestor of all tests defining eg. default browser size
 - [Overloading](https://github.com/lmc-eu/steward-example/blob/master/selenium-tests/tests/MobileTitlePageTest.php#L13-L16) of the default browser size in one test (which tests responsive mobile version of a site)
-- Component [`TitlePage`](https://github.com/lmc-eu/steward-example/blob/master/selenium-tests/tests/Pages/TitlePage.php) (extending `AbstractComponent`) as an implementation of [page object pattern](http://martinfowler.com/bliki/PageObject.html)
+- Component [`TitlePage`](https://github.com/lmc-eu/steward-example/blob/master/selenium-tests/tests/Pages/TitlePage.php) (extending `AbstractComponent`) as an implementation of [page object pattern](https://martinfowler.com/bliki/PageObject.html)
 - Usage of Steward's syntax sugar methods (`findByCss()`, `waitForCss()` etc.)
 - Defining [time delay and dependency](https://github.com/lmc-eu/steward-example/blob/master/selenium-tests/tests/DelayedExampleTest.php#L17-L18) between tests
 - [Storing](https://github.com/lmc-eu/steward-example/blob/master/selenium-tests/tests/SeedDataTest.php#L51) data in one test-case and [loading](https://github.com/lmc-eu/steward-example/blob/master/selenium-tests/tests/DelayedExampleTest.php#L28-L29) them in other using the `Legacy` component
