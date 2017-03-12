@@ -14,18 +14,12 @@
     ],
     "prefer-stable": true,
     "require": {
-        "lmc/steward": "dev-bugfix/capabilities-parsing as 2.3",
+        "lmc/steward": "dev-master as 2.3",
         "fzaninotto/faker": "~1.4"
     },
     "autoload": {
         "psr-4": {
           "My\\": "tests/"
         }
-    },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/OndraM/steward"
     }
-  ]
 }
