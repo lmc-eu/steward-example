@@ -13,8 +13,12 @@ addons:
       - oracle-java8-installer
 
 env:
-  - BROWSER=phantomjs
-  - BROWSER=firefox
+  global:
+    - SELENIUM_SERVER_VERSION="3.1.0"
+    - GECKODRIVER_VERSION="0.14.0"
+  matrix:
+    - BROWSER=phantomjs
+    - BROWSER=firefox
 
 matrix:
   include:
@@ -31,15 +35,14 @@ matrix:
 
 before_install:
   - cd selenium-tests/
-  - export SELENIUM_SERVER_VERSION="3.1.0"
 
 install:
   - composer install --no-interaction # Install Steward and its dependencies
   - if [ -n "$USE_STEWARD_MASTER" ]; then composer require lmc/steward:dev-master --update-with-dependencies; fi
   - SELENIUM_PATH=$(./vendor/bin/steward install $SELENIUM_SERVER_VERSION --no-interaction) # Download the Selenium standalone server jar file
   - echo "Selenium server path:" $SELENIUM_PATH
-  - if [ ! -f geckodriver/geckodriver ]; then mkdir geckodriver; wget -q -t 3 https://github.com/mozilla/geckodriver/releases/download/v0.14.0/geckodriver-v0.14.0-linux64.tar.gz; tar -xzf geckodriver-v0.14.0-linux64.tar.gz -C geckodriver; fi
-  - GECKODRIVER_PATH=./geckodriver/geckodriver
+  - if [ "$BROWSER" = "firefox" ]; then mkdir geckodriver; wget -q -t 3 https://github.com/mozilla/geckodriver/releases/download/v$GECKODRIVER_VERSION/geckodriver-v$GECKODRIVER_VERSION-linux64.tar.gz; tar -xzf geckodriver-v$GECKODRIVER_VERSION-linux64.tar.gz -C geckodriver; fi
+  - if [ "$BROWSER" = "firefox" ]; then export GECKODRIVER_PATH=./geckodriver/geckodriver; fi
 
 before_script:
   - /usr/lib/jvm/java-8-oracle/bin/java -jar $SELENIUM_PATH -role hub -log selenium-server.log &
@@ -71,4 +74,3 @@ after_script:
 cache:
   directories:
     - $HOME/.composer/cache
-    - geckodriver
