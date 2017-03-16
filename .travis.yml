@@ -14,8 +14,8 @@ addons:
 
 env:
   global:
-    - SELENIUM_SERVER_VERSION="3.1.0"
-    - GECKODRIVER_VERSION="0.14.0"
+    - SELENIUM_SERVER_VERSION="3.3.1"
+    - GECKODRIVER_VERSION="0.15.0"
   matrix:
     - BROWSER=phantomjs
     - BROWSER=firefox
