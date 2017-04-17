@@ -24,6 +24,7 @@ class TitlePage extends AbstractComponent
     {
         $this->debug('Getting recent news');
         $recentNews = $this->findMultipleByCss(self::RECENT_NEWS_SELECTOR);
+
         return $recentNews;
     }
 
@@ -42,6 +43,7 @@ class TitlePage extends AbstractComponent
     public function isLeftSidebarVisible()
     {
         $this->debug('Checking visibility of left column');
+
         return $this->findByClass(self::LEFT_COLUMN_CLASS)->isDisplayed();
     }
 

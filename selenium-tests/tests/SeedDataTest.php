@@ -22,9 +22,10 @@ use Faker;
  */
 class SeedDataTest extends MyAbstractTestCase
 {
+    const SEED_DATA_LEGACY_NAME = 'seed-data';
+
     /** @var Legacy */
     private $legacy;
-    const SEED_DATA_LEGACY_NAME = 'seed-data';
 
     /**
      * @before

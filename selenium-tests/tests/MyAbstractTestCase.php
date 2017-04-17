@@ -24,7 +24,7 @@ abstract class MyAbstractTestCase extends AbstractTestCase
         // Set base url according to environment
         switch (ConfigProvider::getInstance()->env) {
             case 'production':
-                self::$baseUrl = 'http://www.w3.org/';
+                self::$baseUrl = 'https://www.w3.org/';
                 break;
             case 'staging':
                 self::$baseUrl = 'http://some-staging-url/';
