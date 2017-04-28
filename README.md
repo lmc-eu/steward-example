@@ -17,10 +17,10 @@ As an example, the tests are run in Firefox and PhantomJS browsers natively on T
 - The [`@noBrowser`](https://github.com/lmc-eu/steward-example/blob/master/selenium-tests/tests/SeedDataTest.php#L21) annotation used when you don't need the browser interaction at all
 - [How](https://github.com/lmc-eu/steward-example/blob/master/.travis.yml) to run tests on Travis CI in both PhantomJS and Firefox browsers
 - Specifying [custom capabilities](https://github.com/lmc-eu/steward-example/blob/master/.travis.yml) using `--capability` option
+- [Custom capability resolver](https://github.com/lmc-eu/steward-example/blob/master/src/CustomCapabilitiesResolver.php) for more complex capability definitions
 - Applying conditions based on current configuration (eg. environment name) [retrieved from ConfigProvider](https://github.com/lmc-eu/steward-example/blob/master/selenium-tests/tests/MyAbstractTestCase.php#L25)
 
 ## What is missing so far
 - Test with file upload and `getFixturePath()` usage
 - Custom EventDispatcher which adds some custom option to the Steward run-tests command
 - Custom publisher that reports the results somewhere
-- Specifying custom browser capabilities on per-browser level
