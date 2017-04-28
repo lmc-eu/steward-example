@@ -14,11 +14,18 @@
     ],
     "prefer-stable": true,
     "require": {
-        "lmc/steward": "dev-master as 2.3",
+        "lmc/steward": "dev-feature/yaml-config as 2.3",
         "fzaninotto/faker": "~1.4"
     },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/OndraM/steward"
+    }
+  ],
     "autoload": {
         "psr-4": {
+          "My\\Steward\\": "src/",
           "My\\": "tests/"
         }
     }

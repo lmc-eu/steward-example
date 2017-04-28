@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "336d6e1af9943b367cdecb5278792f65",
-    "content-hash": "b1832669fe0bf9b124f8447269eb7824",
+    "hash": "70650ae4a10093cff821f1e91142747e",
+    "content-hash": "f9596e77811c9822c901eef38689d768",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -520,16 +520,16 @@
         },
         {
             "name": "lmc/steward",
-            "version": "dev-master",
+            "version": "dev-feature/yaml-config",
             "source": {
                 "type": "git",
-                "url": "https://github.com/lmc-eu/steward.git",
-                "reference": "73bef60ab34a82a9d9c715a7e4264fdd46451027"
+                "url": "https://github.com/OndraM/steward.git",
+                "reference": "b588c19dab43125691b55acdbb2d93711b18ebfd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lmc-eu/steward/zipball/73bef60ab34a82a9d9c715a7e4264fdd46451027",
-                "reference": "73bef60ab34a82a9d9c715a7e4264fdd46451027",
+                "url": "https://api.github.com/repos/OndraM/steward/zipball/b588c19dab43125691b55acdbb2d93711b18ebfd",
+                "reference": "b588c19dab43125691b55acdbb2d93711b18ebfd",
                 "shasum": ""
             },
             "require": {
@@ -542,7 +542,6 @@
                 "florianwolters/component-util-singleton": "0.3.2",
                 "graphp/algorithms": "^0.8.1",
                 "nette/reflection": "^2.3.2",
-                "nette/utils": "~2.3",
                 "ondram/ci-detector": "^2.0",
                 "php": "^5.6 || ~7.0",
                 "phpunit/phpunit": "^5.7",
@@ -550,13 +549,17 @@
                 "symfony/event-dispatcher": "~3.0",
                 "symfony/filesystem": "~3.0",
                 "symfony/finder": "~3.0",
-                "symfony/process": "^3.0.4"
+                "symfony/options-resolver": "^3.2",
+                "symfony/process": "^3.2.0",
+                "symfony/stopwatch": "^3.0",
+                "symfony/yaml": "^3.2"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.0",
                 "php-mock/php-mock-phpunit": "~1.0",
                 "satooshi/php-coveralls": "^1.0",
-                "squizlabs/php_codesniffer": "^2.4.1"
+                "squizlabs/php_codesniffer": "^2.4.1",
+                "symfony/var-dumper": "^3.2"
             },
             "suggest": {
                 "ext-posix": "For colored output",
@@ -577,7 +580,21 @@
                     "Lmc\\Steward\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Lmc\\Steward\\": "src-tests/"
+                }
+            },
+            "scripts": {
+                "codestyle:check": [
+                    "vendor/bin/php-cs-fixer fix --diff --dry-run",
+                    "vendor/bin/phpcs --standard=ruleset.xml"
+                ],
+                "codestyle:fix": [
+                    "vendor/bin/php-cs-fixer fix --diff || exit 0",
+                    "vendor/bin/phpcbf --standard=ruleset.xml"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -588,7 +605,10 @@
                 "testing",
                 "webdriver"
             ],
-            "time": "2017-04-10 21:54:03"
+            "support": {
+                "source": "https://github.com/OndraM/steward/tree/feature/yaml-config"
+            },
+            "time": "2017-04-28 20:23:40"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2363,6 +2383,60 @@
             "time": "2017-03-20 09:32:19"
         },
         {
+            "name": "symfony/options-resolver",
+            "version": "v3.2.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/options-resolver.git",
+                "reference": "6a19be85237fe8bbd4975f86942b4763bb0da6ca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/6a19be85237fe8bbd4975f86942b4763bb0da6ca",
+                "reference": "6a19be85237fe8bbd4975f86942b4763bb0da6ca",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\OptionsResolver\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony OptionsResolver Component",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "config",
+                "configuration",
+                "options"
+            ],
+            "time": "2017-03-21 21:44:32"
+        },
+        {
             "name": "symfony/polyfill-mbstring",
             "version": "v1.3.0",
             "source": {
@@ -2469,6 +2543,55 @@
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
             "time": "2017-03-27 18:07:02"
+        },
+        {
+            "name": "symfony/stopwatch",
+            "version": "v3.2.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/stopwatch.git",
+                "reference": "c5ee0f8650c84b4d36a5f76b3b504233feaabf75"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/c5ee0f8650c84b4d36a5f76b3b504233feaabf75",
+                "reference": "c5ee0f8650c84b4d36a5f76b3b504233feaabf75",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Stopwatch\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Stopwatch Component",
+            "homepage": "https://symfony.com",
+            "time": "2017-02-18 17:28:00"
         },
         {
             "name": "symfony/yaml",
@@ -2581,7 +2704,7 @@
         {
             "alias": "2.3",
             "alias_normalized": "2.3.0.0",
-            "version": "9999999-dev",
+            "version": "dev-feature/yaml-config",
             "package": "lmc/steward"
         }
     ],
