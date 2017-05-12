@@ -14,7 +14,7 @@
     ],
     "prefer-stable": true,
     "require": {
-        "lmc/steward": "dev-feature/yaml-config as 2.3",
+        "lmc/steward": "^2.2",
         "fzaninotto/faker": "~1.4"
     },
   "repositories": [
