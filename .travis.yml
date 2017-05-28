@@ -43,9 +43,6 @@ matrix:
   allow_failures:
     - env: BROWSER=firefox
 
-before_install:
-  - cd selenium-tests/
-
 install:
   - composer install --no-interaction # Install Steward and its dependencies
   - if [ -n "$USE_STEWARD_MASTER" ]; then composer require lmc/steward:dev-master --update-with-dependencies; fi
