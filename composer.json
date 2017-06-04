@@ -17,12 +17,6 @@
         "lmc/steward": "^2.2",
         "fzaninotto/faker": "~1.4"
     },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/OndraM/steward"
-    }
-  ],
     "autoload": {
         "psr-4": {
           "My\\Steward\\": "src/",
