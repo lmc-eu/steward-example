@@ -2,7 +2,9 @@
 
 namespace My;
 
+use Facebook\WebDriver\Remote\WebDriverBrowserType;
 use Facebook\WebDriver\WebDriverDimension;
+use Lmc\Steward\ConfigProvider;
 use My\Pages\TitlePage;
 
 /**
@@ -24,6 +26,11 @@ class MobileTitlePageTest extends MyAbstractTestCase
      */
     public function init()
     {
+        if (ConfigProvider::getInstance()->browserName == WebDriverBrowserType::CHROME) {
+            // https://bugs.chromium.org/p/chromium/issues/detail?id=604324#c46
+            $this->markTestSkipped('Window size cannot be changed run-time in headless Chrome 60');
+        }
+
         $this->titlePage = new TitlePage($this);
         $this->wd->get(self::$baseUrl);
     }
