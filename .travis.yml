@@ -50,6 +50,9 @@ install:
   - echo "Selenium server path:" $SELENIUM_PATH
   - if [ "$BROWSER" = "firefox" ]; then mkdir geckodriver; wget -q -t 3 https://github.com/mozilla/geckodriver/releases/download/v$GECKODRIVER_VERSION/geckodriver-v$GECKODRIVER_VERSION-linux64.tar.gz; tar -xzf geckodriver-v$GECKODRIVER_VERSION-linux64.tar.gz -C geckodriver; fi
   - if [ "$BROWSER" = "firefox" ]; then export GECKODRIVER_PATH=./geckodriver/geckodriver; fi
+  - if [ "$BROWSER" = "phantomjs" ]; then wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.8-linux-x86_64.tar.bz2; fi
+  - if [ "$BROWSER" = "phantomjs" ]; then tar -xvf ./phantomjs-1.9.8-linux-x86_64.tar.bz2; fi
+  - if [ "$BROWSER" = "phantomjs" ]; then export PATH=$PWD/phantomjs-1.9.8-linux-x86_64/bin:$PATH; fi
 
 before_script:
   - /usr/lib/jvm/java-8-oracle/bin/java -jar $SELENIUM_PATH -role hub -log selenium-server.log &
