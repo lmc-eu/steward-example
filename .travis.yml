@@ -8,9 +8,6 @@ addons:
   firefox: "latest"
   jwt:
     secure: XKHU62aeWKe1M9cP7M1Is63NbiuVJUB9o6ijuLvChiiu4/jOW+YU3WtcLfsbWjZj4IwMF8AlZ6gmoA2RVi3JeviyWddax+tgsF8TyTTqW9jjdu2fdkTW1lCaVBoTVbi0u+1Gx6NJBqr0DUTgKSW7orEwvHDO0X5LZD6KZqNl7xZI+aI/321pvp5KexooDH4TrutKKYb3xJcVkc8m5RnSwaCFoiP+yWZsjAoN7sshtIpAKsX1271XhH+SSvOXLr2fH7GHB2iSQMBljf1fh9kSy7RVW4rL29/X6gwcQUZ9E9EB3KhQjaqsNFxzHzHBqesUfYwkWTL4MH7q9Jn3GBXFiqRGIvvub5dvoNtZcPnqF59UJNRb5/i7XJpJ5uTOBIfQQaLXp72DGP7udbGjakG9HvdaosjtsJLj0vt8voHLWXo9+HD2S8yC11Um5/FpleiNAlID4MAKJSrZiV4BGz54l4DmmTlCSBNm/9NhKVqyNnTl62xGTG/wjimUhfWB/DNrbqtYdr2EvZoyB8shZ/D5JYByCj0VogMJi3qVAkEU9UaFSTKprTZn2uTdZoOICPOl/FLKFKbdabfnIg4c1GCQ9zs7mzsV9wpj4fUnwpWkNYbg9F0l06kXBdYTG4+mnQW6Pbwejfpp1wt8CcXoxvYmwgXJp9PrhnbNq8ffh10RPUg=
-  apt:
-    packages:
-      - oracle-java8-installer
 
 env:
   global:
@@ -55,7 +52,7 @@ install:
   - if [ "$BROWSER" = "phantomjs" ]; then export PATH=$PWD/phantomjs-1.9.8-linux-x86_64/bin:$PATH; fi
 
 before_script:
-  - /usr/lib/jvm/java-8-oracle/bin/java -jar $SELENIUM_PATH -role hub -log selenium-server.log &
+  - java -jar $SELENIUM_PATH -role hub -log selenium-server.log &
   - until $(echo | nc localhost 4444); do sleep 1; echo Waiting for selenium-server to start...; done;
 
   # Start two PhantomJS instances
@@ -65,12 +62,12 @@ before_script:
   # Start first Firefox instance
   - if [ "$BROWSER" = "firefox" ]; then Xvfb :99 -nolisten tcp -ac -screen 0 1280x1024x24 & fi
   - if [ "$BROWSER" = "firefox" ]; then export DISPLAY=:99.0; fi
-  - if [ "$BROWSER" = "firefox" ]; then /usr/lib/jvm/java-8-oracle/bin/java -Dwebdriver.gecko.driver="$GECKODRIVER_PATH" -jar $SELENIUM_PATH -role node -port 8910 -maxSession 1 & fi
+  - if [ "$BROWSER" = "firefox" ]; then java -Dwebdriver.gecko.driver="$GECKODRIVER_PATH" -jar $SELENIUM_PATH -role node -port 8910 -maxSession 1 & fi
 
   # Start second Firefox instance
   - if [ "$BROWSER" = "firefox" ]; then Xvfb :98 -nolisten tcp -ac -screen 0 1280x1024x24 & fi
   - if [ "$BROWSER" = "firefox" ]; then export DISPLAY=:98.0; fi
-  - if [ "$BROWSER" = "firefox" ]; then /usr/lib/jvm/java-8-oracle/bin/java -Dwebdriver.gecko.driver="$GECKODRIVER_PATH" -jar $SELENIUM_PATH -role node -port 8911 -maxSession 1 & fi
+  - if [ "$BROWSER" = "firefox" ]; then java -Dwebdriver.gecko.driver="$GECKODRIVER_PATH" -jar $SELENIUM_PATH -role node -port 8911 -maxSession 1 & fi
 
   - sleep 3 # wait until browsers starts
 
