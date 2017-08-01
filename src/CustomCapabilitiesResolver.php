@@ -2,11 +2,13 @@
 
 namespace My\Steward;
 
+use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\WebDriverBrowserType;
 use Lmc\Steward\ConfigProvider;
 use Lmc\Steward\Selenium\CustomCapabilitiesResolverInterface;
 use Lmc\Steward\Test\AbstractTestCase;
+use OndraM\CiDetector\CiDetector;
 
 /**
  * You can define capabilities for one test run using the `--capability` option of `steward run` command. However,
@@ -36,6 +38,15 @@ class CustomCapabilitiesResolver implements CustomCapabilitiesResolverInterface
         // Capability only for specific browser
         if ($this->config->browserName === WebDriverBrowserType::IE) {
             $capabilities->setCapability('ms:someEdgeCapability', 'true');
+        }
+
+        // When on CI, run Chrome in headless mode
+        if ((new CiDetector())->isCiDetected() && $this->config->browserName === WebDriverBrowserType::CHROME) {
+            $chromeOptions = new ChromeOptions();
+            // In headless Chrome 60, window size cannot be changed run-time:
+            // https://bugs.chromium.org/p/chromium/issues/detail?id=604324#c46
+            $chromeOptions->addArguments(['--headless', 'window-size=1024,768']);
+            $capabilities->setCapability(ChromeOptions::CAPABILITY, $chromeOptions);
         }
 
         return $capabilities;

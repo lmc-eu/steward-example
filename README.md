@@ -3,7 +3,7 @@
 
 This is an example project showing usage and extensibility of [Steward](https://github.com/lmc-eu/steward), a PHP tool for Selenium WebDriver functional testing.
 
-As an example, the tests are run in Firefox and PhantomJS browsers natively on Travis CI, but also in Microsoft Edge using
+As an example, the tests are run in Firefox, [headless Chrome](https://developers.google.com/web/updates/2017/04/headless-chrome) and PhantomJS browsers natively on Travis CI, but also in Microsoft Edge using
 [Sauce Labs](https://saucelabs.com/) cloud service (see [Sauce Labs build status](https://saucelabs.com/u/php-webdriver) or [results of a single build](https://saucelabs.com/beta/builds/4f1103bede17401d8f5f9f626ce8da26)).
 
 ## What is shown in this example project
