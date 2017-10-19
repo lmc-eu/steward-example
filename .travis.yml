@@ -14,9 +14,9 @@ addons:
 
 env:
   global:
-    - SELENIUM_SERVER_VERSION="3.4.0"
-    - CHROMEDRIVER_VERSION="2.31"
-    - GECKODRIVER_VERSION="0.18.0"
+    - SELENIUM_SERVER_VERSION="3.6.0"
+    - CHROMEDRIVER_VERSION="2.33"
+    - GECKODRIVER_VERSION="0.19.0"
   matrix:
     - BROWSER=phantomjs
     - BROWSER=firefox
@@ -59,7 +59,7 @@ install:
   - if [ "$BROWSER" = "phantomjs" ]; then export PATH=$PWD/phantomjs-1.9.8-linux-x86_64/bin:$PATH; fi
 
 before_script:
-  - java -jar $SELENIUM_PATH -role hub -log selenium-server.log &
+  - java -jar $SELENIUM_PATH -role hub -enablePassThrough false -log selenium-server.log &
   - until $(echo | nc localhost 4444); do sleep 1; echo Waiting for selenium-server to start...; done;
 
   # Start two PhantomJS instances

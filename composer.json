@@ -22,5 +22,10 @@
           "My\\Steward\\": "src/",
           "My\\": "tests/"
         }
+    },
+    "config": {
+        "platform": {
+            "php": "5.6"
+        }
     }
 }
