@@ -6,6 +6,16 @@ This is an example project showing usage and extensibility of [Steward](https://
 As an example, the tests are run in Firefox, [headless Chrome](https://developers.google.com/web/updates/2017/04/headless-chrome) and PhantomJS browsers natively on Travis CI, but also in Microsoft Edge using
 [Sauce Labs](https://saucelabs.com/) cloud service (see [Sauce Labs build status](https://saucelabs.com/u/php-webdriver) or [results of a single build](https://saucelabs.com/beta/builds/4f1103bede17401d8f5f9f626ce8da26)).
 
+## Example usage
+```bash
+docker run -d -p 4444:4444 -p 5900:5900  selenium/standalone-firefox-debug:2.53.1
+git clone git@github.com:lmc-eu/steward-example.git
+cd steward-example
+composer install
+./vendor/bin/steward run production firefox
+```
+Assumes [composer](https://getcomposer.org/) and [Docker](https://docs.docker.com/engine/installation/) are installed.
+
 ## What is shown in this example project
 - Custom [`MyAbstractTestCase`](https://github.com/lmc-eu/steward-example/blob/master/tests/MyAbstractTestCase.php) class as a common ancestor of all tests defining eg. default browser size
 - [Overloading](https://github.com/lmc-eu/steward-example/blob/master/tests/MobileTitlePageTest.php#L14-L17) of the default browser size in one test (which tests responsive mobile version of a site)
