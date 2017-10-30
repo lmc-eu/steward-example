@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "beberlei/assert",
-            "version": "v2.7.7",
+            "version": "v2.7.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/beberlei/assert.git",
-                "reference": "4d00ada2d4840409a6010ce7b737434306fee770"
+                "reference": "be6aa40e3f2d2f0766f159409ab9a80c8db6ca23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/assert/zipball/4d00ada2d4840409a6010ce7b737434306fee770",
-                "reference": "4d00ada2d4840409a6010ce7b737434306fee770",
+                "url": "https://api.github.com/repos/beberlei/assert/zipball/be6aa40e3f2d2f0766f159409ab9a80c8db6ca23",
+                "reference": "be6aa40e3f2d2f0766f159409ab9a80c8db6ca23",
                 "shasum": ""
             },
             "require": {
@@ -59,7 +59,7 @@
                 "assertion",
                 "validation"
             ],
-            "time": "2017-10-18T15:33:20+00:00"
+            "time": "2017-10-20T15:59:40+00:00"
         },
         {
             "name": "clue/graph",
@@ -521,16 +521,16 @@
         },
         {
             "name": "lmc/steward",
-            "version": "2.3.0",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lmc-eu/steward.git",
-                "reference": "65dc8e6bb32ba054ab7bf28cde7edf5f097588bd"
+                "reference": "e7d7282416844f0f16e397ca76c4b0dec2fd7c2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lmc-eu/steward/zipball/65dc8e6bb32ba054ab7bf28cde7edf5f097588bd",
-                "reference": "65dc8e6bb32ba054ab7bf28cde7edf5f097588bd",
+                "url": "https://api.github.com/repos/lmc-eu/steward/zipball/e7d7282416844f0f16e397ca76c4b0dec2fd7c2f",
+                "reference": "e7d7282416844f0f16e397ca76c4b0dec2fd7c2f",
                 "shasum": ""
             },
             "require": {
@@ -557,8 +557,8 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.0",
+                "php-coveralls/php-coveralls": "^1.0.2",
                 "php-mock/php-mock-phpunit": "~1.0",
-                "satooshi/php-coveralls": "^1.0",
                 "squizlabs/php_codesniffer": "^2.4.1",
                 "symfony/var-dumper": "^3.2"
             },
@@ -598,41 +598,44 @@
                 "testing",
                 "webdriver"
             ],
-            "time": "2017-10-11T07:56:52+00:00"
+            "time": "2017-10-30T16:57:09+00:00"
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.6.1",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "8e6e04167378abf1ddb4d3522d8755c5fd90d102"
+                "reference": "3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/8e6e04167378abf1ddb4d3522d8755c5fd90d102",
-                "reference": "8e6e04167378abf1ddb4d3522d8755c5fd90d102",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e",
+                "reference": "3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.0"
+                "php": "^5.6 || ^7.0"
             },
             "require-dev": {
-                "doctrine/collections": "1.*",
-                "phpunit/phpunit": "~4.1"
+                "doctrine/collections": "^1.0",
+                "doctrine/common": "^2.6",
+                "phpunit/phpunit": "^4.1"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "DeepCopy\\": "src/DeepCopy/"
-                }
+                },
+                "files": [
+                    "src/DeepCopy/deep_copy.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Create deep copies (clones) of your objects",
-            "homepage": "https://github.com/myclabs/DeepCopy",
             "keywords": [
                 "clone",
                 "copy",
@@ -640,7 +643,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2017-04-12T18:52:22+00:00"
+            "time": "2017-10-19T19:58:43+00:00"
         },
         {
             "name": "nette/caching",
