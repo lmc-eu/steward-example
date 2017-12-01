@@ -46,6 +46,7 @@ matrix:
     - env: BROWSER=firefox
 
 install:
+  - composer self-update 1.5.2 # temporary force Composer 1.5.2 - https://github.com/composer/composer/issues/6859
   - composer install --no-interaction # Install Steward and its dependencies
   - if [ -n "$USE_STEWARD_MASTER" ]; then composer require lmc/steward:dev-master --update-with-dependencies; fi
   - SELENIUM_PATH=$(./vendor/bin/steward install $SELENIUM_SERVER_VERSION --no-interaction) # Download the Selenium standalone server jar file
