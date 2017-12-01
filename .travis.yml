@@ -14,9 +14,9 @@ addons:
 
 env:
   global:
-    - SELENIUM_SERVER_VERSION="3.6.0"
+    - SELENIUM_SERVER_VERSION="3.8.0"
     - CHROMEDRIVER_VERSION="2.33"
-    - GECKODRIVER_VERSION="0.19.0"
+    - GECKODRIVER_VERSION="0.19.1"
   matrix:
     - BROWSER=phantomjs
     - BROWSER=firefox
@@ -67,17 +67,17 @@ before_script:
   - if [ "$BROWSER" = "phantomjs" ]; then phantomjs --webdriver-selenium-grid-hub=http://127.0.0.1:4444 --webdriver=8911 & fi
 
   # Start Chrome on first Selenium node
-  - if [ "$BROWSER" = "chrome" ]; then java -Dwebdriver.chrome.driver="$CHROMEDRIVER_PATH" -jar $SELENIUM_PATH -role node -port 8910 & fi
+  - if [ "$BROWSER" = "chrome" ]; then java -Dwebdriver.chrome.driver="$CHROMEDRIVER_PATH" -jar $SELENIUM_PATH -role node -port 8910 -log selenium-node-1.log -enablePassThrough false & fi
 
   # Start Firefox on first Selenium node
   - if [ "$BROWSER" = "firefox" ]; then Xvfb :99 -nolisten tcp -ac -screen 0 1280x1024x24 & fi
   - if [ "$BROWSER" = "firefox" ]; then export DISPLAY=:99.0; fi
-  - if [ "$BROWSER" = "firefox" ]; then java -Dwebdriver.gecko.driver="$GECKODRIVER_PATH" -jar $SELENIUM_PATH -role node -port 8910 -maxSession 1 & fi
+  - if [ "$BROWSER" = "firefox" ]; then java -Dwebdriver.gecko.driver="$GECKODRIVER_PATH" -jar $SELENIUM_PATH -role node -port 8910 -maxSession 1 -log selenium-node-1.log -enablePassThrough false & fi
 
   # Start Firefox on second Selenium node
   - if [ "$BROWSER" = "firefox" ]; then Xvfb :98 -nolisten tcp -ac -screen 0 1280x1024x24 & fi
   - if [ "$BROWSER" = "firefox" ]; then export DISPLAY=:98.0; fi
-  - if [ "$BROWSER" = "firefox" ]; then java -Dwebdriver.gecko.driver="$GECKODRIVER_PATH" -jar $SELENIUM_PATH -role node -port 8911 -maxSession 1 & fi
+  - if [ "$BROWSER" = "firefox" ]; then java -Dwebdriver.gecko.driver="$GECKODRIVER_PATH" -jar $SELENIUM_PATH -role node -port 8911 -maxSession 1 -log selenium-node-2.log -enablePassThrough false  & fi
 
   - sleep 3 # wait until browsers starts
 
@@ -87,6 +87,8 @@ script:
 after_script:
   - ./vendor/bin/steward results -vvv
   - cat selenium-server.log
+  - cat selenium-node-1.log
+  - cat selenium-node-2.log
 
 cache:
   directories:
