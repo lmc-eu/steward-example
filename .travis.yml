@@ -4,7 +4,7 @@ dist: trusty
 
 php:
   - 5.6
-  - 7.1
+  - 7.2
 
 addons:
   firefox: latest
@@ -24,9 +24,9 @@ env:
 
 matrix:
   include:
-    - php: 7
+    - php: 7.2
       env: BROWSER=phantomjs USE_STEWARD_MASTER=1 # run tests also against Steward master branch
-    - php: 7
+    - php: 7.2
       env: BROWSER=microsoftedge SAUCELABS=1 # run tests in MicrosoftEdge on SauceLabs cloud
       install:
         - composer install --no-interaction
@@ -34,7 +34,7 @@ matrix:
       script:
         - ./vendor/bin/steward run production $BROWSER -vvv --server-url=http://$SAUCE_USERNAME:$SAUCE_ACCESS_KEY@ondemand.saucelabs.com  --capability="platform:Windows 10" --capability="version:'14.14393'"
       after_script: ~
-    - php: 7
+    - php: 7.2
       env: BROWSER=firefox SAUCELABS=1 # run tests in Firefox on SauceLabs cloud
       install:
         - composer install --no-interaction
