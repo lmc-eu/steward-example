@@ -9,3 +9,6 @@ logs
 .idea
 *.iml
 nbproject
+
+# Temporary ignore composer.lock, because during Steward 3.0 development all build are run with composer update.
+composer.lock

@@ -14,7 +14,7 @@
     ],
     "prefer-stable": true,
     "require": {
-        "lmc/steward": "^2.2",
+        "lmc/steward": "dev-master",
         "fzaninotto/faker": "~1.4"
     },
     "autoload": {
