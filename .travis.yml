@@ -25,8 +25,6 @@ env:
 matrix:
   include:
     - php: 7.2
-      env: BROWSER=phantomjs USE_STEWARD_MASTER=1 # run tests also against Steward master branch
-    - php: 7.2
       env: BROWSER=microsoftedge SAUCELABS=1 # run tests in MicrosoftEdge on SauceLabs cloud
       install:
         - composer install --no-interaction
@@ -47,7 +45,6 @@ matrix:
 
 install:
   - composer install --no-interaction # Install Steward and its dependencies
-  - if [ -n "$USE_STEWARD_MASTER" ]; then composer require lmc/steward:dev-master --update-with-dependencies; fi
   - SELENIUM_PATH=$(./vendor/bin/steward install $SELENIUM_SERVER_VERSION --no-interaction) # Download the Selenium standalone server jar file
   - echo "Selenium server path:" $SELENIUM_PATH
   - if [ "$BROWSER" = "chrome" ]; then mkdir chromedriver; wget -q -t 3 https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip; unzip chromedriver_linux64 -d chromedriver; fi
