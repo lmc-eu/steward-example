@@ -18,7 +18,6 @@ env:
     - CHROMEDRIVER_VERSION="2.33"
     - GECKODRIVER_VERSION="0.19.1"
   matrix:
-    - BROWSER=phantomjs
     - BROWSER=firefox
     - BROWSER=chrome
 
@@ -45,6 +44,7 @@ matrix:
 
 install:
   - composer install --no-interaction # Install Steward and its dependencies
+# Currently all build are against master; reenable this after Steward 3.0 is tagged
 #  - if [ -n "$USE_STEWARD_MASTER" ]; then composer require lmc/steward:dev-master --update-with-dependencies; fi
   - SELENIUM_PATH=$(./vendor/bin/steward install $SELENIUM_SERVER_VERSION --no-interaction) # Download the Selenium standalone server jar file
   - echo "Selenium server path:" $SELENIUM_PATH
@@ -52,19 +52,12 @@ install:
   - if [ "$BROWSER" = "chrome" ]; then export CHROMEDRIVER_PATH=./chromedriver/chromedriver; fi
   - if [ "$BROWSER" = "firefox" ]; then mkdir geckodriver; wget -q -t 3 https://github.com/mozilla/geckodriver/releases/download/v$GECKODRIVER_VERSION/geckodriver-v$GECKODRIVER_VERSION-linux64.tar.gz; tar -xzf geckodriver-v$GECKODRIVER_VERSION-linux64.tar.gz -C geckodriver; fi
   - if [ "$BROWSER" = "firefox" ]; then export GECKODRIVER_PATH=./geckodriver/geckodriver; fi
-  - if [ "$BROWSER" = "phantomjs" ]; then wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.8-linux-x86_64.tar.bz2; fi
-  - if [ "$BROWSER" = "phantomjs" ]; then tar -xvf ./phantomjs-1.9.8-linux-x86_64.tar.bz2; fi
-  - if [ "$BROWSER" = "phantomjs" ]; then export PATH=$PWD/phantomjs-1.9.8-linux-x86_64/bin:$PATH; fi
 
 before_script:
   - java -jar $SELENIUM_PATH -role hub -enablePassThrough false -log selenium-server.log &
   - until $(echo | nc localhost 4444); do sleep 1; echo Waiting for selenium-server to start...; done;
 
-  # Start two PhantomJS instances
-  - if [ "$BROWSER" = "phantomjs" ]; then phantomjs --webdriver-selenium-grid-hub=http://127.0.0.1:4444 --webdriver=8910 & fi
-  - if [ "$BROWSER" = "phantomjs" ]; then phantomjs --webdriver-selenium-grid-hub=http://127.0.0.1:4444 --webdriver=8911 & fi
-
-  # Start Chrome on first Selenium node
+  # Start one Selenium node for headless Chrome
   - if [ "$BROWSER" = "chrome" ]; then java -Dwebdriver.chrome.driver="$CHROMEDRIVER_PATH" -jar $SELENIUM_PATH -role node -port 8910 -log selenium-node-1.log -enablePassThrough false & fi
 
   # Start Firefox on first Selenium node
