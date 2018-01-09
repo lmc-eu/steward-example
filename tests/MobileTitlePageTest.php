@@ -14,9 +14,9 @@ use My\Pages\TitlePage;
 class MobileTitlePageTest extends MyAbstractTestCase
 {
     /** @var int Width of browser window */
-    public static $browserWidth = 320;
+    public const BROWSER_WIDTH = 320;
     /** @var int Height of browser window */
-    public static $browserHeight = 480;
+    public const BROWSER_HEIGHT = 480;
 
     /** @var TitlePage The title-page Page Object */
     protected $titlePage;

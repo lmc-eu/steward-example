@@ -11,9 +11,9 @@ use Lmc\Steward\Test\AbstractTestCase;
 abstract class MyAbstractTestCase extends AbstractTestCase
 {
     /** @var int Default width of browser window (Steward's default is 1280) */
-    public static $browserWidth = 1024;
+    public const BROWSER_WIDTH = 1024;
     /** @var int Default height of browser window (Steward's default is 1024) */
-    public static $browserHeight = 768;
+    public const BROWSER_HEIGHT = 768;
     /** @var string */
     public static $baseUrl;
 
