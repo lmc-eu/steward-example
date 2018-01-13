@@ -14,7 +14,7 @@ addons:
 
 env:
   global:
-    - SELENIUM_SERVER_VERSION="3.8.1"
+    - SELENIUM_SERVER_VERSION="3.7.1"
     - CHROMEDRIVER_VERSION="2.34"
     - GECKODRIVER_VERSION="0.19.1"
   matrix:
@@ -42,6 +42,7 @@ matrix:
       after_script: ~
   allow_failures:
     - env: BROWSER=firefox
+    - env: BROWSER=phantomjs
 
 install:
   - composer install --no-interaction # Install Steward and its dependencies
