@@ -39,8 +39,6 @@ matrix:
       script:
         - ./vendor/bin/steward run production $BROWSER -vvv --server-url=http://$SAUCE_USERNAME:$SAUCE_ACCESS_KEY@ondemand.saucelabs.com  --capability="platform:Windows 10" --capability="version:'52.0'"
       after_script: ~
-  allow_failures:
-    - env: BROWSER=firefox
 
 install:
   - composer install --no-interaction # Install Steward and its dependencies
