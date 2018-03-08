@@ -6,7 +6,8 @@ use Lmc\Steward\ConfigProvider;
 use Lmc\Steward\Test\AbstractTestCase;
 
 /**
- * Abstract class for custom tests, could eg. define some properties or instantiate some common components in setUp().
+ * Abstract class for custom tests, could eg. define some properties or instantiate some common components
+ * using @before annotated methods.
  */
 abstract class MyAbstractTestCase extends AbstractTestCase
 {
@@ -17,10 +18,11 @@ abstract class MyAbstractTestCase extends AbstractTestCase
     /** @var string */
     public static $baseUrl;
 
-    public function setUp()
+    /**
+     * @before
+     */
+    public function initBaseUrl()
     {
-        parent::setUp();
-
         // Set base url according to environment
         switch (ConfigProvider::getInstance()->env) {
             case 'production':
@@ -38,7 +40,7 @@ abstract class MyAbstractTestCase extends AbstractTestCase
 
         $this->debug('Base URL set to "%s"', self::$baseUrl);
 
-        if (ConfigProvider::getInstance()->env == 'production') {
+        if (ConfigProvider::getInstance()->env === 'production') {
             $this->warn('The tests are run against production, so be careful!');
         }
     }
