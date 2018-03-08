@@ -15,7 +15,7 @@ env:
   global:
     - USE_STEWARD_MASTER=1 # During Steward 3.0 development always run against latest Steward master branch
     - SELENIUM_SERVER_VERSION="3.8.1"
-    - CHROMEDRIVER_VERSION="2.34"
+    - CHROMEDRIVER_VERSION="2.36"
     - GECKODRIVER_VERSION="0.19.1"
   matrix:
     - BROWSER=firefox
