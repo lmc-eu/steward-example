@@ -29,7 +29,7 @@ matrix:
         - composer install --no-interaction
       before_script: ~
       script:
-        - ./vendor/bin/steward run production $BROWSER -vvv --server-url=http://$SAUCE_USERNAME:$SAUCE_ACCESS_KEY@ondemand.saucelabs.com  --capability="platform:Windows 10" --capability="version:'14.14393'"
+        - ./vendor/bin/steward run production $BROWSER -vvv --server-url=http://$SAUCE_USERNAME:$SAUCE_ACCESS_KEY@ondemand.saucelabs.com/wd/hub  --capability="platform:Windows 10" --capability="version:'14.14393'"
       after_script: ~
     - php: 7.2
       env: BROWSER=firefox SAUCELABS=1 # run tests in Firefox on SauceLabs cloud
@@ -37,7 +37,7 @@ matrix:
         - composer install --no-interaction # This is actually composer update, because composer.lock is temporarily removed from the repo
       before_script: ~
       script:
-        - ./vendor/bin/steward run production $BROWSER -vvv --server-url=http://$SAUCE_USERNAME:$SAUCE_ACCESS_KEY@ondemand.saucelabs.com  --capability="platform:Windows 10" --capability="version:'52.0'"
+        - ./vendor/bin/steward run production $BROWSER -vvv --server-url=http://$SAUCE_USERNAME:$SAUCE_ACCESS_KEY@ondemand.saucelabs.com/wd/hub  --capability="platform:Windows 10" --capability="version:'52.0'"
       after_script: ~
 
 install:
