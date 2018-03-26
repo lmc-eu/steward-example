@@ -30,8 +30,10 @@ class CustomCapabilitiesResolver implements CustomCapabilitiesResolverInterface
         $this->config = $config;
     }
 
-    public function resolveDesiredCapabilities(AbstractTestCase $test, DesiredCapabilities $capabilities)
-    {
+    public function resolveDesiredCapabilities(
+        AbstractTestCase $test,
+        DesiredCapabilities $capabilities
+    ): DesiredCapabilities {
         // Capability defined for all test runs
         $capabilities->setCapability('pageLoadStrategy', 'normal');
 
@@ -53,9 +55,10 @@ class CustomCapabilitiesResolver implements CustomCapabilitiesResolverInterface
         return $capabilities;
     }
 
-
-    public function resolveRequiredCapabilities(AbstractTestCase $test, DesiredCapabilities $capabilities)
-    {
+    public function resolveRequiredCapabilities(
+        AbstractTestCase $test,
+        DesiredCapabilities $capabilities
+    ): DesiredCapabilities {
         return $capabilities;
     }
 }
