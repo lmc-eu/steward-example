@@ -1,15 +1,14 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace My;
 
 use Lmc\Steward\ConfigProvider;
-use Lmc\Steward\Test\AbstractTestCase;
 
 /**
  * Abstract class for custom tests, could eg. define some properties or instantiate some common components
  * using @before annotated methods.
  */
-abstract class MyAbstractTestCase extends AbstractTestCase
+abstract class AbstractTestCase extends \Lmc\Steward\Test\AbstractTestCase
 {
     /** @var int Default width of browser window (Steward's default is 1280) */
     public const BROWSER_WIDTH = 1024;

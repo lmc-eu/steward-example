@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace My;
 
@@ -17,7 +17,7 @@ use Lmc\Steward\Component\Legacy;
  * @delayAfter My\SeedDataTest
  * @delayMinutes 0.1
  */
-class DelayedExampleTest extends MyAbstractTestCase
+class DelayedExampleTest extends AbstractTestCase
 {
     /** @var array */
     private $data;

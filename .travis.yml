@@ -39,6 +39,16 @@ matrix:
       script:
         - ./vendor/bin/steward run production $BROWSER -vvv --server-url=http://$SAUCE_USERNAME:$SAUCE_ACCESS_KEY@ondemand.saucelabs.com/wd/hub  --capability="platform:Windows 10" --capability="version:'52.0'"
       after_script: ~
+    - php: 7.2
+      env: CHECK_CODESTYLE=1
+      before_install:
+        - phpenv config-rm xdebug.ini
+      install:
+        - composer install --no-interaction
+      before_script: ~
+      script:
+        - composer analyze
+      after_script: ~
   allow_failures:
     - env: BROWSER=firefox
 

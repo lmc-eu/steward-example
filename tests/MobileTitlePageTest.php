@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace My;
 
@@ -9,9 +9,10 @@ use My\Pages\TitlePage;
 
 /**
  * Example and simple tests of w3.org title page in mobile mode.
+ *
  * @group responsive
  */
-class MobileTitlePageTest extends MyAbstractTestCase
+class MobileTitlePageTest extends AbstractTestCase
 {
     /** @var int Width of browser window */
     public const BROWSER_WIDTH = 320;
@@ -26,7 +27,7 @@ class MobileTitlePageTest extends MyAbstractTestCase
      */
     public function init()
     {
-        if (ConfigProvider::getInstance()->browserName == WebDriverBrowserType::CHROME) {
+        if (ConfigProvider::getInstance()->browserName === WebDriverBrowserType::CHROME) {
             // https://bugs.chromium.org/p/chromium/issues/detail?id=604324#c46
             $this->markTestSkipped('Window size cannot be changed run-time in headless Chrome 60');
         }

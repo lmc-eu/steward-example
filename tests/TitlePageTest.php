@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace My;
 
@@ -7,7 +7,7 @@ use My\Pages\TitlePage;
 /**
  * Example and simple tests of w3.org title page.
  */
-class TitlePageTest extends MyAbstractTestCase
+class TitlePageTest extends AbstractTestCase
 {
     /** @var TitlePage The title-page Page Object */
     protected $titlePage;
@@ -38,7 +38,7 @@ class TitlePageTest extends MyAbstractTestCase
         $this->assertFalse($this->titlePage->isLeftSidebarVisible());
     }
 
-    public function testShouldContainSearchFormLeadingToDuckDuckGo()
+    public function testShouldContainSearchFormLeadingToDuckDuckGo(): void
     {
         $this->titlePage->fillAndSubmitSearch('HTML 5');
 

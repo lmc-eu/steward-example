@@ -18,11 +18,19 @@
         "lmc/steward": "dev-master",
         "fzaninotto/faker": "~1.4"
     },
+    "require-dev": {
+        "lmc/coding-standard": "^1.0"
+    },
     "autoload": {
         "psr-4": {
           "My\\Steward\\": "src/",
           "My\\": "tests/"
         }
+    },
+    "scripts": {
+        "analyze": [
+            "vendor/bin/ecs check src/ tests/ -vvv --ansi --clear-cache"
+        ]
     },
     "config": {
         "platform": {

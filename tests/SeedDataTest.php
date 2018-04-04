@@ -1,9 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace My;
 
-use Lmc\Steward\Component\Legacy;
 use Faker;
+use Lmc\Steward\Component\Legacy;
 
 /**
  * This test is an example how to deal with situation when we need to do something before some other test could be run.
@@ -20,7 +20,7 @@ use Faker;
  *
  * @noBrowser
  */
-class SeedDataTest extends MyAbstractTestCase
+class SeedDataTest extends AbstractTestCase
 {
     const SEED_DATA_LEGACY_NAME = 'seed-data';
 

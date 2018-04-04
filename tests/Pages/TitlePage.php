@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace My\Pages;
 
@@ -7,6 +7,7 @@ use Lmc\Steward\Component\AbstractComponent;
 
 /**
  * Title page representation using Page Object pattern
+ *
  * @see http://martinfowler.com/bliki/PageObject.html
  */
 class TitlePage extends AbstractComponent
@@ -18,9 +19,10 @@ class TitlePage extends AbstractComponent
 
     /**
      * Get listed recent news
+     *
      * @return WebDriverElement[]
      */
-    public function getRecentNews()
+    public function getRecentNews(): array
     {
         $this->debug('Getting recent news');
         $recentNews = $this->findMultipleByCss(self::RECENT_NEWS_SELECTOR);
@@ -37,10 +39,7 @@ class TitlePage extends AbstractComponent
         $this->findByCss(self::MOBILE_VIEW_LINK_SELECTOR)->click();
     }
 
-    /**
-     * @return bool
-     */
-    public function isLeftSidebarVisible()
+    public function isLeftSidebarVisible(): bool
     {
         $this->debug('Checking visibility of left column');
 
@@ -49,9 +48,8 @@ class TitlePage extends AbstractComponent
 
     /**
      * Fill and submit google custom search form and wait until results page is loaded
-     * @param $query
      */
-    public function fillAndSubmitSearch($query)
+    public function fillAndSubmitSearch(string $query)
     {
         $queryInput = $this->waitForCss(self::SEARCH_INPUT_SELECTOR);
         $queryInput->sendKeys($query)
