@@ -1,9 +1,12 @@
 language: php
 
-dist: trusty
+dist: xenial
 
 php:
   - 7.4
+
+services:
+  - xvfb
 
 addons:
   firefox: latest
@@ -71,13 +74,9 @@ before_script:
   - if [ "$BROWSER" = "chrome" ]; then java -Dwebdriver.chrome.driver="$CHROMEDRIVER_PATH" -jar $SELENIUM_PATH -role node -port 8910 -log selenium-node-1.log -enablePassThrough false & fi
 
   # Start Firefox on first Selenium node
-  - if [ "$BROWSER" = "firefox" ]; then Xvfb :99 -nolisten tcp -ac -screen 0 1280x1024x24 & fi
-  - if [ "$BROWSER" = "firefox" ]; then export DISPLAY=:99.0; fi
   - if [ "$BROWSER" = "firefox" ]; then java -Dwebdriver.gecko.driver="$GECKODRIVER_PATH" -jar $SELENIUM_PATH -role node -port 8910 -maxSession 1 -log selenium-node-1.log -enablePassThrough false & fi
 
   # Start Firefox on second Selenium node
-  - if [ "$BROWSER" = "firefox" ]; then Xvfb :98 -nolisten tcp -ac -screen 0 1280x1024x24 & fi
-  - if [ "$BROWSER" = "firefox" ]; then export DISPLAY=:98.0; fi
   - if [ "$BROWSER" = "firefox" ]; then java -Dwebdriver.gecko.driver="$GECKODRIVER_PATH" -jar $SELENIUM_PATH -role node -port 8911 -maxSession 1 -log selenium-node-2.log -enablePassThrough false  & fi
 
   - sleep 3 # wait until browsers starts
