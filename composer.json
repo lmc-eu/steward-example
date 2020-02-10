@@ -16,7 +16,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": "^7.1",
-        "lmc/steward": "dev-master",
+        "lmc/steward": "^3.0@dev",
         "fzaninotto/faker": "~1.4"
     },
     "require-dev": {

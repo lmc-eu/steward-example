@@ -3,7 +3,7 @@ language: php
 dist: trusty
 
 php:
-  - 7.2
+  - 7.4
 
 addons:
   firefox: latest
@@ -13,7 +13,6 @@ addons:
 
 env:
   global:
-    - USE_STEWARD_MASTER=1 # During Steward 3.0 development always run against latest Steward master branch
     - SELENIUM_SERVER_VERSION="3.8.1"
     - CHROMEDRIVER_VERSION="2.36"
     - GECKODRIVER_VERSION="0.19.1"
@@ -23,7 +22,9 @@ env:
 
 matrix:
   include:
-    - php: 7.2
+    - php: 7.4
+      env: USE_STEWARD_MASTER=1 # run tests also against Steward master branch
+    - php: 7.4
       env: BROWSER=microsoftedge SAUCELABS=1 # run tests in MicrosoftEdge on SauceLabs cloud
       install:
         - composer install --no-interaction
@@ -31,7 +32,7 @@ matrix:
       script:
         - ./vendor/bin/steward run production $BROWSER -vvv --server-url=http://$SAUCE_USERNAME:$SAUCE_ACCESS_KEY@ondemand.saucelabs.com/wd/hub  --capability="platform:Windows 10" --capability="version:'14.14393'"
       after_script: ~
-    - php: 7.2
+    - php: 7.4
       env: BROWSER=firefox SAUCELABS=1 # run tests in Firefox on SauceLabs cloud
       install:
         - composer install --no-interaction # This is actually composer update, because composer.lock is temporarily removed from the repo
@@ -39,7 +40,7 @@ matrix:
       script:
         - ./vendor/bin/steward run production $BROWSER -vvv --server-url=http://$SAUCE_USERNAME:$SAUCE_ACCESS_KEY@ondemand.saucelabs.com/wd/hub  --capability="platform:Windows 10" --capability="version:'52.0'"
       after_script: ~
-    - php: 7.2
+    - php: 7.4
       env: CHECK_CODESTYLE=1
       before_install:
         - phpenv config-rm xdebug.ini
@@ -54,8 +55,7 @@ matrix:
 
 install:
   - composer install --no-interaction # Install Steward and its dependencies
-# Currently all build are against master; reenable this after Steward 3.0 is tagged
-#  - if [ -n "$USE_STEWARD_MASTER" ]; then composer require lmc/steward:dev-master --update-with-dependencies; fi
+  - if [ -n "$USE_STEWARD_MASTER" ]; then composer require lmc/steward:dev-master --update-with-dependencies; fi
   - SELENIUM_PATH=$(./vendor/bin/steward install $SELENIUM_SERVER_VERSION --no-interaction) # Download the Selenium standalone server jar file
   - echo "Selenium server path:" $SELENIUM_PATH
   - if [ "$BROWSER" = "chrome" ]; then mkdir chromedriver; wget -q -t 3 https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip; unzip chromedriver_linux64 -d chromedriver; fi
