@@ -30,15 +30,6 @@ class TitlePage extends AbstractComponent
         return $recentNews;
     }
 
-    /**
-     * Click header link to set mobile view of the page
-     */
-    public function setMobileView()
-    {
-        $this->debug('Enabling mobile view');
-        $this->findByCss(self::MOBILE_VIEW_LINK_SELECTOR)->click();
-    }
-
     public function isLeftSidebarVisible(): bool
     {
         $this->debug('Checking visibility of left column');
