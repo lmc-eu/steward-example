@@ -1,9 +1,9 @@
 # [Steward](https://github.com/lmc-eu/steward) example project
-[![Build Status](https://img.shields.io/travis/lmc-eu/steward-example.svg?style=flat-square)](https://travis-ci.org/lmc-eu/steward-example)
+[![GitHub Actions Build Status](https://img.shields.io/github/workflow/status/lmc-eu/steward-example/Tests%20and%20linting?style=flat-square&label=GitHub%20Actions%20build)](https://github.com/lmc-eu/steward-example/actions)
 
 This is an example project showing usage and extensibility of [Steward](https://github.com/lmc-eu/steward), a PHP tool for Selenium WebDriver functional testing.
 
-As an example, the tests are run in Firefox and [headless Chrome](https://developers.google.com/web/updates/2017/04/headless-chrome) browsers natively on Travis CI, but also in Microsoft Edge using
+As an example, the tests are run in Firefox and Chrome browsers in Docker images running on GitHub Actions, but also in Microsoft Edge using
 [Sauce Labs](https://saucelabs.com/) cloud service (see [Sauce Labs build status](https://saucelabs.com/u/php-webdriver) or [results of a single build](https://saucelabs.com/beta/builds/4f1103bede17401d8f5f9f626ce8da26)).
 
 ## What is shown in this example project
