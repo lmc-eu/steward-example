@@ -1,5 +1,0 @@
-imports:
-    - { resource: '%vendor_dir%/lmc/coding-standard/easy-coding-standard.yaml' }
-parameters:
-    exclude_checkers:
-        - 'PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer' # requiring void return typehints could be confusing for PHP-beginners

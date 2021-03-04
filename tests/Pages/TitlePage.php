@@ -12,10 +12,10 @@ use Lmc\Steward\Component\AbstractComponent;
  */
 class TitlePage extends AbstractComponent
 {
-    const RECENT_NEWS_SELECTOR = '#w3c_most-recently > .event';
-    const MOBILE_VIEW_LINK_SELECTOR = '.secondary_nav a.mobile';
-    const LEFT_COLUMN_CLASS = 'w3c_leftCol';
-    const SEARCH_INPUT_SELECTOR = '#search-form input[name=q]';
+    public const RECENT_NEWS_SELECTOR = '#w3c_most-recently > .event';
+    public const MOBILE_VIEW_LINK_SELECTOR = '.secondary_nav a.mobile';
+    public const LEFT_COLUMN_CLASS = 'w3c_leftCol';
+    public const SEARCH_INPUT_SELECTOR = '#search-form input[name=q]';
 
     /**
      * Get listed recent news

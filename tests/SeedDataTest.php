@@ -22,7 +22,7 @@ use Lmc\Steward\Component\Legacy;
  */
 class SeedDataTest extends AbstractTestCase
 {
-    const SEED_DATA_LEGACY_NAME = 'seed-data';
+    public const SEED_DATA_LEGACY_NAME = 'seed-data';
 
     /** @var Legacy */
     private $legacy;
