@@ -15,7 +15,7 @@
     "require": {
         "php": "^7.3",
         "fzaninotto/faker": "~1.4",
-        "lmc/steward": "^3.0@dev"
+        "lmc/steward": "dev-bugfix/geckodriver-delete-session-workaround"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.13",

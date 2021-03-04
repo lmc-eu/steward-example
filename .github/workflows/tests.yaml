@@ -13,25 +13,35 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        browser: ['chrome']
+        browser: ['chrome', 'firefox']
 
     name: "Selenium - ${{ matrix.browser }}"
 
     services:
       selenium-hub:
-        image: selenium/hub:3.141.59
-        volumes:
-          - /dev/shm:/dev/shm
+        image: selenium/hub:4.0.0-beta-1-20210215
         options: >-
           --health-cmd "/opt/bin/check-grid.sh"
         ports:
           - 4444:4444
 
       selenium-node-chrome:
-        image: selenium/node-chrome:3.141.59
+        image: selenium/node-chrome:4.0.0-beta-1-20210215
+        volumes:
+          - /dev/shm:/dev/shm
         env:
-          HUB_HOST: selenium-hub
-          HUB_PORT: 4444
+          SE_EVENT_BUS_HOST: selenium-hub
+          SE_EVENT_BUS_PUBLISH_PORT: 4442
+          SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
+
+      selenium-node-firefox:
+        image: selenium/node-firefox:4.0.0-beta-1-20210215
+        volumes:
+          - /dev/shm:/dev/shm
+        env:
+          SE_EVENT_BUS_HOST: selenium-hub
+          SE_EVENT_BUS_PUBLISH_PORT: 4442
+          SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
 
     steps:
       - uses: actions/checkout@v2
@@ -47,6 +57,20 @@ jobs:
 
       - name: Run Steward
         run: vendor/bin/steward run production ${{ matrix.browser }} -vvv
+
+      - name: Upload logs and screenshots
+        uses: actions/upload-artifact@v2
+        if: ${{ success() || failure() }}
+        with:
+          name: logs
+          path: ${{ github.workspace }}/logs/*
+          retention-days: 1
+
+      - name: Print services logs
+        if: ${{ success() || failure() }}
+        run: |
+          docker logs "${{ job.services.selenium-hub.id }}"
+          docker logs "${{ job.services.selenium-node-firefox.id }}"
 
   codestyle:
     name: "Code style and static analysis"
