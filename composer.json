@@ -4,38 +4,53 @@
     "license": "MIT",
     "authors": [
         {
-          "name": "Ondřej Machulda",
-          "email": "ondrej.machulda@gmail.com"
+            "name": "Ondřej Machulda",
+            "email": "ondrej.machulda@gmail.com"
         },
         {
-          "name": "LMC s.r.o.",
-          "homepage": "https://github.com/lmc-eu"
+            "name": "LMC s.r.o.",
+            "homepage": "https://github.com/lmc-eu"
         }
     ],
-    "prefer-stable": true,
-    "minimum-stability": "dev",
     "require": {
-        "php": "^7.1",
-        "lmc/steward": "^3.0@dev",
-        "fzaninotto/faker": "~1.4"
+        "php": "^7.3",
+        "fzaninotto/faker": "~1.4",
+        "lmc/steward": "^3.0@dev"
     },
     "require-dev": {
-        "lmc/coding-standard": "^1.0"
-    },
-    "autoload": {
-        "psr-4": {
-          "My\\Steward\\": "src/",
-          "My\\": "tests/"
-        }
-    },
-    "scripts": {
-        "analyze": [
-            "vendor/bin/ecs check src/ tests/ -vvv --ansi --clear-cache"
-        ]
+        "ergebnis/composer-normalize": "^2.13",
+        "lmc/coding-standard": "^1.0",
+        "php-parallel-lint/php-parallel-lint": "^1.2"
     },
     "config": {
         "platform": {
-            "php": "7.2"
+            "php": "7.3"
         }
+    },
+    "autoload": {
+        "psr-4": {
+            "My\\Steward\\": "src/",
+            "My\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "all": [
+            "@lint",
+            "@analyze"
+        ],
+        "analyze": [
+            "vendor/bin/ecs check src/ tests/ --ansi --clear-cache"
+        ],
+        "fix": [
+            "@composer normalize",
+            "vendor/bin/ecs check src/ tests/ --ansi --fix"
+        ],
+        "lint": [
+            "vendor/bin/parallel-lint -j 10 ./src ./tests",
+            "@composer validate",
+            "@composer normalize --dry-run"
+        ]
     }
 }
