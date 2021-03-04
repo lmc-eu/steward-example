@@ -31,13 +31,6 @@ class TitlePageTest extends AbstractTestCase
         $this->assertTrue($this->titlePage->isLeftSidebarVisible(), 'Left sidebar is not visible!');
     }
 
-    public function testShouldNotDisplayLeftSidebarInMobileView()
-    {
-        $this->assertTrue($this->titlePage->isLeftSidebarVisible());
-        $this->titlePage->setMobileView();
-        $this->assertFalse($this->titlePage->isLeftSidebarVisible());
-    }
-
     public function testShouldContainSearchFormLeadingToDuckDuckGo(): void
     {
         $this->titlePage->fillAndSubmitSearch('HTML 5');

@@ -4,26 +4,67 @@ on:
   push:
   pull_request:
   schedule:
-    - cron:  '0 3 * * *'
+    - cron: '0 3 * * *'
 
 jobs:
+  selenium:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: ['chrome']
+
+    name: "Selenium - ${{ matrix.browser }}"
+
+    services:
+      selenium-hub:
+        image: selenium/hub:3.141.59
+        volumes:
+          - /dev/shm:/dev/shm
+        options: >-
+          --health-cmd "/opt/bin/check-grid.sh"
+        ports:
+          - 4444:4444
+
+      selenium-node-chrome:
+        image: selenium/node-chrome:3.141.59
+        env:
+          HUB_HOST: selenium-hub
+          HUB_PORT: 4444
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          extensions: mbstring, intl, zip
+
+      - name: Install dependencies
+        run: composer update --no-progress
+
+      - name: Run Steward
+        run: vendor/bin/steward run production ${{ matrix.browser }} -vvv
+
   codestyle:
-      name: "Code style and static analysis"
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
+    name: "Code style and static analysis"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
 
-        - name: Setup PHP
-          uses: shivammathur/setup-php@v2
-          with:
-            php-version: '7.4'
-            extensions: mbstring, intl
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          extensions: mbstring, intl
 
-        - name: Install dependencies
-          run: composer update --no-progress
+      - name: Install dependencies
+        run: composer update --no-progress
 
-        - name: Lint
-          run: composer lint
+      - name: Lint
+        run: composer lint
 
-        - name: Run checks
-          run: composer analyze
+      - name: Run checks
+        run: composer analyze
