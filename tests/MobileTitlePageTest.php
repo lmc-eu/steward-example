@@ -27,17 +27,17 @@ class MobileTitlePageTest extends AbstractTestCase
      */
     public function init()
     {
-        if (ConfigProvider::getInstance()->browserName === WebDriverBrowserType::CHROME) {
-            // https://bugs.chromium.org/p/chromium/issues/detail?id=604324#c46
-            $this->markTestSkipped('Window size cannot be changed run-time in headless Chrome 60');
-        }
-
         $this->titlePage = new TitlePage($this);
         $this->wd->get(self::$baseUrl);
     }
 
     public function testShouldNotDisplayLeftSidebarInMobileView()
     {
+        if (ConfigProvider::getInstance()->browserName === WebDriverBrowserType::MICROSOFT_EDGE) {
+            // https://bugs.chromium.org/p/chromium/issues/detail?id=604324#c46
+            $this->markTestSkipped('Window cannot be resized to <516px in MS Edge on Sauce Labs');
+        }
+
         /** @var WebDriverDimension $size */
         $size = $this->wd->manage()->window()->getSize();
         $this->log('Current screen size is %dx%d px', $size->getWidth(), $size->getHeight());
