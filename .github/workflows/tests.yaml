@@ -82,13 +82,13 @@ jobs:
       - name: Generate timeline.html
         run: vendor/bin/steward generate-timeline
 
-      - name: Upload logs and screenshots
+      - name: Upload logs and screenshots artifacts
         uses: actions/upload-artifact@v2
         if: ${{ success() || failure() }}
         with:
           name: logs (Selenium - ${{ matrix.browser }}, Steward ${{ matrix.name }})
           path: ${{ github.workspace }}/logs/*
-          retention-days: 1
+          retention-days: 7
 
       - name: Print services logs
         if: ${{ success() || failure() }}
@@ -101,6 +101,51 @@ jobs:
           docker logs "${{ job.services.selenium-node-firefox-1.id }}"
           echo --- selenium-node-firefox-2 ---
           docker logs "${{ job.services.selenium-node-firefox-2.id }}"
+
+  sauce-labs:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { browser: 'microsoftedge' }
+          - { browser: 'firefox' }
+
+    name: "Sauce Labs - ${{ matrix.browser }}"
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          extensions: mbstring, intl, zip
+
+      - name: Install dependencies
+        run: composer update --no-progress
+
+      - name: Start Sauce Connect
+        uses: saucelabs/sauce-connect-action@v1
+        with:
+          username: ${{ secrets.SAUCE_USERNAME }}
+          accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
+          scVersion: 4.6.4
+
+      - name: Run tests
+        run: vendor/bin/steward run production ${{ matrix.browser }} -vvv --server-url=https://${{ secrets.SAUCE_USERNAME }}:${{ secrets.SAUCE_ACCESS_KEY }}@ondemand.saucelabs.com:443/wd/hub --capability="platform:Windows 10"  --capability="version:latest"
+
+      - name: Print results
+        run: vendor/bin/steward results -vvv
+
+      - name: Upload logs and screenshots artifacts
+        uses: actions/upload-artifact@v2
+        if: ${{ success() || failure() }}
+        with:
+          name: logs (Sauce Labs - ${{ matrix.browser }})
+          path: ${{ github.workspace }}/logs/*
+          retention-days: 7
 
   codestyle:
     name: "Code style and static analysis"
