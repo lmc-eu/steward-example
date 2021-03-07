@@ -4,7 +4,7 @@
 This is an example project showing usage and extensibility of [Steward](https://github.com/lmc-eu/steward), a PHP tool for Selenium WebDriver functional testing.
 
 As an example, the tests are run in Firefox and Chrome browsers in Docker images running on GitHub Actions, but also in Microsoft Edge using
-[Sauce Labs](https://saucelabs.com/) cloud service (see [Sauce Labs build status](https://saucelabs.com/u/php-webdriver) or [results of a single build](https://saucelabs.com/beta/builds/4f1103bede17401d8f5f9f626ce8da26)).
+[Sauce Labs](https://saucelabs.com/) cloud service (see [Sauce Labs build status](https://saucelabs.com/u/OndraM).
 
 ## What is shown in this example project
 - Custom [`MyAbstractTestCase`](https://github.com/lmc-eu/steward-example/blob/master/tests/MyAbstractTestCase.php) class as a common ancestor of all tests defining eg. default browser size
