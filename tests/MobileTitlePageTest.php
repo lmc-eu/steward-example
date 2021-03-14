@@ -50,7 +50,7 @@ class MobileTitlePageTest extends AbstractTestCase
         $this->titlePage->fillAndSubmitSearch('responsive images');
 
         // The search form should lead us to DuckDuckGo search
-        $this->assertContains('duckduckgo.com', $this->wd->getCurrentURL());
-        $this->assertContains('site:w3.org', $this->wd->getTitle());
+        $this->assertStringContainsString('duckduckgo.com', $this->wd->getCurrentURL());
+        $this->assertStringContainsString('site:w3.org', $this->wd->getTitle());
     }
 }
