@@ -15,7 +15,7 @@
     "require": {
         "php": "^7.3",
         "fakerphp/faker": "^1.13",
-        "lmc/steward": "^3.0@dev",
+        "lmc/steward": "^3.0.0",
         "ondram/ci-detector": "^4.0",
         "php-webdriver/webdriver": "^1.10"
     },
@@ -35,7 +35,7 @@
             "My\\": "tests/"
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "beta",
     "prefer-stable": true,
     "scripts": {
         "all": [
