@@ -23,7 +23,7 @@ jobs:
 
     services:
       selenium-hub:
-        image: selenium/hub:4.0.0-beta-1-20210215
+        image: selenium/hub:4.1.0
         options: >-
           --health-cmd "/opt/bin/check-grid.sh"
         ports:
@@ -31,7 +31,7 @@ jobs:
 
       # Start one instance of Chrome
       selenium-node-chrome:
-        image: selenium/node-chrome:4.0.0-beta-1-20210215
+        image: selenium/node-chrome:4.1.0
         volumes:
           - /dev/shm:/dev/shm
         env:
@@ -41,7 +41,7 @@ jobs:
 
       # Start two instances of Firefox
       selenium-node-firefox-1:
-        image: selenium/node-firefox:4.0.0-beta-1-20210215
+        image: selenium/node-firefox:4.1.0
         volumes:
           - /dev/shm:/dev/shm
         env:
@@ -49,7 +49,7 @@ jobs:
           SE_EVENT_BUS_PUBLISH_PORT: 4442
           SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
       selenium-node-firefox-2:
-        image: selenium/node-firefox:4.0.0-beta-1-20210215
+        image: selenium/node-firefox:4.1.0
         volumes:
           - /dev/shm:/dev/shm
         env:
@@ -63,7 +63,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          php-version: '8.1'
           extensions: mbstring, intl, zip
 
       - name: Install dependencies
@@ -120,7 +120,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          php-version: '8.1'
           extensions: mbstring, intl, zip
 
       - name: Install dependencies
@@ -131,7 +131,7 @@ jobs:
         with:
           username: ${{ secrets.SAUCE_USERNAME }}
           accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
-          scVersion: 4.6.4
+          scVersion: latest
 
       - name: Run tests
         run: vendor/bin/steward run production ${{ matrix.browser }} -vvv --server-url=https://${{ secrets.SAUCE_USERNAME }}:${{ secrets.SAUCE_ACCESS_KEY }}@ondemand.saucelabs.com:443/wd/hub --capability="platform:Windows 10"  --capability="version:latest"
@@ -156,7 +156,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          php-version: '8.1'
           extensions: mbstring, intl
 
       - name: Install dependencies
