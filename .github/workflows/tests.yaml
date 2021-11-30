@@ -103,6 +103,7 @@ jobs:
           docker logs "${{ job.services.selenium-node-firefox-2.id }}"
 
   sauce-labs:
+    if: github.event.pull_request.head.repo.full_name == github.repository # do not run on forks
     runs-on: ubuntu-latest
 
     strategy:
