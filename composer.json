@@ -24,19 +24,19 @@
         "lmc/coding-standard": "^3.0",
         "php-parallel-lint/php-parallel-lint": "^1.2"
     },
-    "config": {
-        "platform": {
-            "php": "7.3"
-        }
-    },
+    "minimum-stability": "beta",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "My\\Steward\\": "src/",
             "My\\": "tests/"
         }
     },
-    "minimum-stability": "beta",
-    "prefer-stable": true,
+    "config": {
+        "platform": {
+            "php": "7.3"
+        }
+    },
     "scripts": {
         "all": [
             "@lint",
