@@ -33,6 +33,10 @@
         }
     },
     "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "ergebnis/composer-normalize": true
+        },
         "platform": {
             "php": "7.3"
         }
