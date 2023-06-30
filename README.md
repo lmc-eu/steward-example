@@ -1,5 +1,5 @@
 # [Steward](https://github.com/lmc-eu/steward) example project
-[![GitHub Actions Build Status](https://img.shields.io/github/workflow/status/lmc-eu/steward-example/Tests%20and%20linting?style=flat-square&label=GitHub%20Actions%20build)](https://github.com/lmc-eu/steward-example/actions)
+[![GitHub Actions Build Status](https://img.shields.io/github/actions/workflow/status/lmc-eu/steward-example/tests.yaml?style=flat-square&label=GitHub%20Actions%20build)](https://github.com//lmc-eu/steward-example/actions)
 
 This is an example project showing usage and extensibility of [Steward](https://github.com/lmc-eu/steward), a PHP tool for Selenium WebDriver functional testing.
 
