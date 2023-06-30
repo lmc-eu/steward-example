@@ -24,7 +24,7 @@ class TitlePageTest extends AbstractTestCase
     public function testShouldContainMainElements()
     {
         // Check title contents
-        $this->assertContains('World Wide Web Consortium', $this->wd->getTitle());
+        $this->assertContains('W3C', $this->wd->getTitle());
         // Check recent news are present (their total count varies over time, so we cannot just use assertCount here)
         $this->assertGreaterThanOrEqual(4, count($this->titlePage->getRecentNews()));
         // Check left sidebar is visible
